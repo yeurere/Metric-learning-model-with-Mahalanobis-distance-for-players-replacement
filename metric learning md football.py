@@ -6,12 +6,11 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import euclidean_distances, cosine_similarity
 
 df = pd.read_csv(
-    r"C:\Users\mejra\Downloads\Telegram Desktop\2022-2023 Football Player Stats.csv",
+    "2022-2023 Football Player Stats.csv",
     sep=";",
     encoding="cp1251"
 )
-# Параметры для каждой позиции.1
-# Названия должны точно совпадать с колонками твоего датасета.
+# Параметр каждой позиции
 POSITION_FEATURES = {
     "DF": [
         "Tkl", "Int", "Clr", "Blocks", "AerWon",
@@ -109,7 +108,7 @@ def find_candidates(df):
     position = choices[choice]
     features = POSITION_FEATURES[position]
 
-    print("\n=== ОПИСАНИЕ СТАТИСТИКИ ===")
+    print("ОПИСАНИЕ СТАТИСТИКИ")
 
     for feature in features:
         print(f"\n{feature} — {FEATURE_DESCRIPTIONS.get(feature, 'Описание отсутствует.')}")
@@ -223,21 +222,21 @@ def find_candidates(df):
 
     top_k = 5
 
-    print("\n=== TOP 5: EUCLIDEAN DISTANCE ===")
+    print("TOP 5: EUCLIDEAN DISTANCE")
     print(
         results.nsmallest(top_k, "Euclidean Distance")[
             ["Player", "Squad", "Euclidean Distance"]
         ].to_string(index=False)
     )
 
-    print("\n=== TOP 5: COSINE SIMILARITY ===")
+    print("TOP 5: COSINE SIMILARITY")
     print(
         results.nlargest(top_k, "Cosine Similarity")[
             ["Player", "Squad", "Cosine Similarity"]
         ].to_string(index=False)
     )
 
-    print("\n=== TOP 5: MAHALANOBIS DISTANCE ===")
+    print("TOP 5: MAHALANOBIS DISTANCE")
     print(
         results.nsmallest(top_k, "Mahalanobis Distance")[
             ["Player", "Squad", "Mahalanobis Distance"]
@@ -245,7 +244,7 @@ def find_candidates(df):
     )
 
     # Ручная оценка качества рекомендаций
-    print("\n=== PRECISION@5: ОЦЕНКА РЕКОМЕНДАЦИЙ ===")
+    print("PRECISION@5: ОЦЕНКА РЕКОМЕНДАЦИЙ")
     print("Для каждого игрока введи 1, если он подходит,")
     print("или 0, если не подходит.")
 
