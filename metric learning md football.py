@@ -29,9 +29,9 @@ warnings.filterwarnings("ignore")
 # 1. CSV FILE PATHS
 # ============================================================
 
-PREMIER_CSV = r"C:\Users\mejra\Desktop\project\players_merged.csv"
-FIRST_CSV   = r"C:\Users\mejra\Desktop\project\firstleague_players_merged.csv"
-SECOND_CSV  = r"C:\Users\mejra\Desktop\project\secondleague_players_merged.csv"
+PREMIER_CSV = r"C:\Users\...\players_merged.csv"
+FIRST_CSV   = r"C:\Users\...\firstleague_players_merged.csv"
+SECOND_CSV  = r"C:\Users\...\secondleague_players_merged.csv"
 
 # Измени названия файлов выше на свои реальные пути.
 
