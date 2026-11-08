@@ -2,8 +2,8 @@ import json
 import time
 import requests
 
-# Пример списка ID игроков (сюда можно собрать все ID игроков лиги)
-player_ids = [1366 ,1883, 146]
+player_ids = [] # players' IDs, that taken from https://kffleague.kz cite's code
+season_id = 200 # id of 2026 Premier League season, for first league id - 204, for second league - 203
 
 all_players_stats = []
 
@@ -15,14 +15,12 @@ headers = {
 }
 
 for player_id in player_ids:
-  # Подставляем ID игрока в эндпоинт
-  url = f"https://kffleague.kz/api/v2/players/{player_id}/stats?season_id=204&lang=ru"
+  url = f"https://kffleague.kz/api/v2/players/{player_id}/stats?season_id={season_id}&lang=ru"
 
   try:
-    response = requests.get(url, headers=headers, timeout=5)
+    response = requests.get(url, headers=headers, timeout=1000)
     if response.status_code == 200:
       data = response.json()
-      # Сохраняем данные игрока
       all_players_stats.append({"player_id": player_id, "stats": data})
       print(f"Игрок с ID {player_id} успешно загружен.")
     else:
@@ -30,15 +28,13 @@ for player_id in player_ids:
   except Exception as e:
     print(f"Ошибка при запросе игрока {player_id}: {e}")
 
-  # Небольшая пауза, чтобы сайт не заблокировал за слишком частые запросы
   time.sleep(0.2)
 
-# --- СОХРАНЕНИЕ В JSON-ФАЙЛ НА КОМПЬТЕРЕ ---
-filename = r"C:\Users\mejra\Desktop\target_players.json"
+filename = r"C:\Users\....\kff_players.json"
 
 with open(filename, "w", encoding="utf-8") as f:
   json.dump(all_players_stats, f, ensure_ascii=False, indent=4)
 
 print(
-    f"\nГотово! Статистика всех игроков сохранена в файл: {filename}"
-)  #[cite: 4]
+    f"\nReady! Statistics saved in: {filename}"
+)  
