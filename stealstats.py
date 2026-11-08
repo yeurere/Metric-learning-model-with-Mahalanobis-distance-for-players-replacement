@@ -3,7 +3,7 @@ import time
 import requests
 
 player_ids = []  # players' IDs, that taken from https://kffleague.kz cite's code 
-season_id = 200  # id of premier league 2026 season, for first league - 204, for second - 203 
+season_id = 200  # id of 2026 premier league season, for first league - 204, for second - 203 
 
 complete_players_data = []
 
@@ -49,7 +49,7 @@ for pid in player_ids:
   except Exception as e:
     print(f'Error while ID request {pid}: {e}')
 
-with open('target_players_names.json', 'w', encoding='utf-8') as f:
+with open('kff_players_names.json', 'w', encoding='utf-8') as f:
   json.dump(complete_players_data, f, ensure_ascii=False, indent=4)
 
-print('\nВсе данные игроков успешно сохранены в файл target_players_names.json!')
+print('\nAll players data saved on kff_players_names.json!')
