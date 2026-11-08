@@ -2,15 +2,13 @@ import json
 import time
 import requests
 
-# 1. Ваши уникальные ID игроков, которые вы собрали из статистики
-player_ids = [1366 ,1883, 146]  # замените на ваш реальный список ID
-season_id = 200  # актуальный ID сезона из вашей ссылки
+player_ids = []  # players' IDs, that taken from https://kffleague.kz cite's code 
+season_id = 200  # id of premier league 2026 season, for first league - 204, for second - 203 
 
 complete_players_data = []
 
 for pid in player_ids:
-  # Формируем ссылку на официальный API игрока
-  api_url = f'https://kffleague.kz/api/v1/players/{pid}?season_id=203&lang=ru'
+  api_url = f'https://kffleague.kz/api/v1/players/{pid}?season_id={season_id}&lang=ru'
 
   headers = {
       'User-Agent': (
@@ -24,15 +22,14 @@ for pid in player_ids:
     if response.status_code == 200:
       data = response.json()
 
-      # Вытаскиваем только те поля, которые понадобятся для модельки
       player_info = {
           'id': data.get('id'),
           'first_name': data.get('first_name'),
           'last_name': data.get('last_name'),
           'birthday': data.get('birthday'),
           'age': data.get('age'),
-          'position_code': data.get('position_code'),  # например, 'GK', 'DEF'
-          'top_role': data.get('top_role'),  # 'ВР (вратарь)'
+          'position_code': data.get('position_code'),  
+          'top_role': data.get('top_role'),  
           'height': data.get('height'),
           'weight': data.get('weight'),
           'jersey_number': data.get('jersey_number'),
@@ -41,19 +38,17 @@ for pid in player_ids:
 
       complete_players_data.append(player_info)
       print(
-          f"Успешно собрано: ID {pid} ->"
+          f"Success: ID {pid} ->"
           f" {player_info['first_name']} {player_info['last_name']}"
       )
     else:
-      print(f'Ошибка API для ID {pid}: статус {response.status_code}')
+      print(f'Error of API for ID {pid}: status {response.status_code}')
 
-    # Небольшая пауза, чтобы не перегружать сервер и избежать блокировки
     time.sleep(0.5)
 
   except Exception as e:
-    print(f'Ошибка при запросе для ID {pid}: {e}')
+    print(f'Error while ID request {pid}: {e}')
 
-# 2. Сохраняем готовую базу данных игроков в JSON
 with open('target_players_names.json', 'w', encoding='utf-8') as f:
   json.dump(complete_players_data, f, ensure_ascii=False, indent=4)
 
