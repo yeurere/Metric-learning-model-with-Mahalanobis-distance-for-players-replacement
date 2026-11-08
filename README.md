@@ -1,2 +1,2 @@
 # Metric-learning-model-with-Mahalanobis-distance-for-players-replacement
-Here are the codes of metric learning model for foundidng of football players and comparison of euclidian distance, mahalanobis distance and cosine similarity metrics. Dataset is taken from kaggle.
+This repository contains code for identifying similar players using metrics such as Mahalanobis distance, Euclidean distance, and cosine similarity. Team IDs were obtained from the link https://kffleague.kz/ru/team/51, while the JSON files containing player IDs were extracted from the team page's source code. All statistics are current as of November 2026.
